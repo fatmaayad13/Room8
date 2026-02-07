@@ -1,43 +1,68 @@
 import Foundation
 
+// MARK: - Chore Model
 struct Chore: Identifiable, Codable {
     let id: UUID
-    var title: String
-    var description: String?
-    var assignedToUserID: UUID?
-    var dueDate: Date?
-    var isCompleted: Bool
-    var completedAt: Date?
-    var recurrence: ChoreRecurrence?
-    var householdID: UUID
-
+    var name: String
+    var description: String
+    var frequency: ChoreFrequency
+    var estimatedMinutes: Int
+    var priority: ChorePriority
+    var assignedTo: UUID?
+    var createdDate: Date
+    var lastCompletedDate: Date?
+    
     init(
         id: UUID = UUID(),
-        title: String,
-        description: String? = nil,
-        assignedToUserID: UUID? = nil,
-        dueDate: Date? = nil,
-        isCompleted: Bool = false,
-        completedAt: Date? = nil,
-        recurrence: ChoreRecurrence? = nil,
-        householdID: UUID
+        name: String,
+        description: String = "",
+        frequency: ChoreFrequency = .weekly,
+        estimatedMinutes: Int = 30,
+        priority: ChorePriority = .medium,
+        assignedTo: UUID? = nil,
+        createdDate: Date = Date(),
+        lastCompletedDate: Date? = nil
     ) {
         self.id = id
-        self.title = title
+        self.name = name
         self.description = description
-        self.assignedToUserID = assignedToUserID
-        self.dueDate = dueDate
-        self.isCompleted = isCompleted
-        self.completedAt = completedAt
-        self.recurrence = recurrence
-        self.householdID = householdID
+        self.frequency = frequency
+        self.estimatedMinutes = estimatedMinutes
+        self.priority = priority
+        self.assignedTo = assignedTo
+        self.createdDate = createdDate
+        self.lastCompletedDate = lastCompletedDate
     }
 }
 
-enum ChoreRecurrence: String, Codable, CaseIterable {
+// MARK: - Chore Frequency
+enum ChoreFrequency: String, Codable, CaseIterable {
     case daily = "Daily"
     case weekly = "Weekly"
     case biweekly = "Bi-weekly"
     case monthly = "Monthly"
-    case none = "One-time"
+    case asNeeded = "As Needed"
+    
+    var days: Int? {
+        switch self {
+        case .daily:
+            return 1
+        case .weekly:
+            return 7
+        case .biweekly:
+            return 14
+        case .monthly:
+            return 30
+        case .asNeeded:
+            return nil
+        }
+    }
+}
+
+// MARK: - Chore Priority
+enum ChorePriority: String, Codable, CaseIterable {
+    case low = "Low"
+    case medium = "Medium"
+    case high = "High"
+    case urgent = "Urgent"
 }

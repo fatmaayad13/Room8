@@ -138,54 +138,6 @@ class MockData {
         )
     ]
 
-    // MARK: - Mock Chores
-    lazy var chores: [Chore] = [
-        Chore(
-            id: UUID(),
-            title: "Take out trash",
-            description: "Trash pickup is Thursday morning",
-            assignedToUserID: currentUser.id,
-            dueDate: Calendar.current.date(byAdding: .day, value: 2, to: Date())!,
-            recurrence: .weekly,
-            householdID: household.id
-        ),
-        Chore(
-            id: UUID(),
-            title: "Clean bathroom",
-            description: "Deep clean, including shower and toilet",
-            assignedToUserID: sarah.id,
-            dueDate: Calendar.current.date(byAdding: .day, value: 1, to: Date())!,
-            recurrence: .weekly,
-            householdID: household.id
-        ),
-        Chore(
-            id: UUID(),
-            title: "Vacuum living room",
-            assignedToUserID: mike.id,
-            dueDate: Date(),
-            isCompleted: false,
-            recurrence: .weekly,
-            householdID: household.id
-        ),
-        Chore(
-            id: UUID(),
-            title: "Mop kitchen floor",
-            assignedToUserID: emma.id,
-            dueDate: Calendar.current.date(byAdding: .day, value: 3, to: Date())!,
-            recurrence: .weekly,
-            householdID: household.id
-        ),
-        Chore(
-            id: UUID(),
-            title: "Change AC filter",
-            description: "Monthly AC maintenance",
-            assignedToUserID: mike.id,
-            dueDate: Calendar.current.date(byAdding: .day, value: 5, to: Date())!,
-            recurrence: .monthly,
-            householdID: household.id
-        )
-    ]
-
     // Helper to get user by ID
     func user(withID id: UUID) -> User? {
         return allUsers.first { $0.id == id }

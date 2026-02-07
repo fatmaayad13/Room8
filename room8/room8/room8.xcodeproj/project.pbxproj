@@ -27,7 +27,6 @@
 		E4D564A62F37B05F00DBA659 /* room8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = room8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D564B42F37B06200DBA659 /* room8Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = room8Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D564BE2F37B06200DBA659 /* room8UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = room8UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4D5655E2F37DAFF00DBA659 /* room8.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = room8.xcodeproj; path = room8/room8.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -89,13 +88,6 @@
 				E4D564A62F37B05F00DBA659 /* room8.app */,
 				E4D564B42F37B06200DBA659 /* room8Tests.xctest */,
 				E4D564BE2F37B06200DBA659 /* room8UITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E4D565612F37DAFF00DBA659 /* Products */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -206,12 +198,6 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E4D564A72F37B05F00DBA659 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = E4D565612F37DAFF00DBA659 /* Products */;
-					ProjectRef = E4D5655E2F37DAFF00DBA659 /* room8.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				E4D564A52F37B05F00DBA659 /* room8 */,

@@ -4,7 +4,7 @@ import SwiftUI
 struct Room8App: App {
     var body: some Scene {
         WindowGroup {
-            ExpenseListView()
+            MainTabView()
         }
     }
 }
