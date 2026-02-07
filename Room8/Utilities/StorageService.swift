@@ -12,6 +12,7 @@ class StorageService {
     private let emergencyContactsKey = "room8_emergency_contacts"
     private let campusSafetyKey = "room8_campus_safety_number"
     private let notificationsEnabledKey = "room8_notifications_enabled"
+    private let calendarItemsKey = "room8_calendar_items"
     private let defaults = UserDefaults.standard
     
     // MARK: - Chore Storage
@@ -120,6 +121,22 @@ class StorageService {
         }
         return defaults.bool(forKey: notificationsEnabledKey)
     }
+
+    // MARK: - Calendar Items Storage
+
+    func saveCalendarItems(_ items: [CalendarItem]) {
+        if let encoded = try? JSONEncoder().encode(items) {
+            defaults.set(encoded, forKey: calendarItemsKey)
+        }
+    }
+
+    func loadCalendarItems() -> [CalendarItem] {
+        guard let data = defaults.data(forKey: calendarItemsKey),
+              let items = try? JSONDecoder().decode([CalendarItem].self, from: data) else {
+            return []
+        }
+        return items
+    }
     
     // MARK: - Clear All Data
     
@@ -132,5 +149,6 @@ class StorageService {
         defaults.removeObject(forKey: emergencyContactsKey)
         defaults.removeObject(forKey: campusSafetyKey)
         defaults.removeObject(forKey: notificationsEnabledKey)
+        defaults.removeObject(forKey: calendarItemsKey)
     }
 }

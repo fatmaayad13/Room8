@@ -26,6 +26,12 @@ struct ContentView: View {
                     Label("Whiteboard", systemImage: "pencil.and.outline")
                 }
 
+            // Calendar Tab
+            CalendarView()
+                .tabItem {
+                    Label("Calendar", systemImage: "calendar")
+                }
+
             // More Tab
             MoreView()
                 .tabItem {
