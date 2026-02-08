@@ -11,7 +11,9 @@ struct Chore: Identifiable, Codable {
     var assignedTo: UUID?
     var createdDate: Date
     var lastCompletedDate: Date?
-    
+    var scheduledDate: Date
+    var isCompleted: Bool
+
     init(
         id: UUID = UUID(),
         name: String,
@@ -21,7 +23,9 @@ struct Chore: Identifiable, Codable {
         priority: ChorePriority = .medium,
         assignedTo: UUID? = nil,
         createdDate: Date = Date(),
-        lastCompletedDate: Date? = nil
+        lastCompletedDate: Date? = nil,
+        scheduledDate: Date = Date(),
+        isCompleted: Bool = false
     ) {
         self.id = id
         self.name = name
@@ -32,6 +36,8 @@ struct Chore: Identifiable, Codable {
         self.assignedTo = assignedTo
         self.createdDate = createdDate
         self.lastCompletedDate = lastCompletedDate
+        self.scheduledDate = scheduledDate
+        self.isCompleted = isCompleted
     }
 }
 

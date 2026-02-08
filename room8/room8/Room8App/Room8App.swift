@@ -2,9 +2,17 @@ import SwiftUI
 
 @main
 struct Room8App: App {
+    @StateObject private var auth = AuthViewModel()
+
     var body: some Scene {
         WindowGroup {
-            MainTabView()
+            if auth.isLoggedIn {
+                MainTabView()
+                    .environmentObject(auth)
+            } else {
+                LoginView()
+                    .environmentObject(auth)
+            }
         }
     }
 }

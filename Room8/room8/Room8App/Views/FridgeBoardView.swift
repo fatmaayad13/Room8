@@ -5,7 +5,7 @@ struct FridgeBoardView: View {
     @State private var showingAddNote = false
     @State private var noteText = ""
     @State private var noteAuthor = ""
-    @State private var selectedColor: StickyColor = .yellow
+    @State private var selectedColor: FridgeStickyColor = .yellow
 
     let columns = [
         GridItem(.adaptive(minimum: 150), spacing: 16)
@@ -125,7 +125,7 @@ struct AddStickyNoteView: View {
     @Binding var isPresented: Bool
     @State private var noteText = ""
     @State private var noteAuthor = ""
-    @State private var selectedColor: StickyColor = .yellow
+    @State private var selectedColor: FridgeStickyColor = .yellow
 
     var body: some View {
         NavigationView {
@@ -141,7 +141,7 @@ struct AddStickyNoteView: View {
 
                 Section(header: Text("Color")) {
                     HStack(spacing: 16) {
-                        ForEach(StickyColor.allCases, id: \.self) { color in
+                        ForEach(FridgeStickyColor.allCases, id: \.self) { color in
                             Circle()
                                 .fill(color.swiftUIColor)
                                 .frame(width: 44, height: 44)
@@ -178,20 +178,7 @@ struct AddStickyNoteView: View {
     }
 }
 
-// MARK: - Sticky Colors
-enum StickyColor: CaseIterable {
-    case yellow, pink, blue, green, peach
-
-    var swiftUIColor: Color {
-        switch self {
-        case .yellow: return Color(red: 1.0, green: 0.98, blue: 0.6)
-        case .pink: return Color(red: 1.0, green: 0.8, blue: 0.9)
-        case .blue: return Color(red: 0.7, green: 0.9, blue: 1.0)
-        case .green: return Color(red: 0.8, green: 1.0, blue: 0.8)
-        case .peach: return Color(red: 1.0, green: 0.9, blue: 0.7)
-        }
-    }
-}
+// Note: FridgeStickyColor moved to FridgeItem.swift as FridgeFridgeStickyColor
 
 #Preview {
     FridgeBoardView()

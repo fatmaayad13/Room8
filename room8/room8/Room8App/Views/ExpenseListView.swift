@@ -1,66 +1,71 @@
 import SwiftUI
 
 struct ExpenseListView: View {
-    @StateObject private var viewModel = ExpenseViewModel()
+    @EnvironmentObject var viewModel: ExpenseViewModel
     @State private var showingAddExpense = false
 
     var body: some View {
-        NavigationView {
-            List {
-                // Summary Section
-                Section {
+        ZStack {
+            Theme.bg.ignoresSafeArea()
+
+            ScrollView {
+                VStack(spacing: 16) {
+                    // Summary Card
                     HStack {
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 6) {
                             Text("Total Expenses")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(.black.opacity(0.55))
                             Text(formatCurrency(viewModel.totalExpenses))
-                                .font(.title2)
-                                .fontWeight(.bold)
+                                .font(.system(size: 28, weight: .bold))
+                                .foregroundColor(Theme.navy)
                         }
 
                         Spacer()
 
-                        NavigationLink(destination: BalanceView(viewModel: viewModel)) {
-                            VStack(alignment: .trailing) {
-                                Text("View Balances")
-                                    .font(.subheadline)
-                                Image(systemName: "chevron.right")
-                                    .font(.caption)
-                            }
+                        Button {
+                            showingAddExpense = true
+                        } label: {
+                            Circle()
+                                .fill(Theme.sage)
+                                .frame(width: 50, height: 50)
+                                .overlay(
+                                    Image(systemName: "plus")
+                                        .font(.system(size: 20, weight: .semibold))
+                                        .foregroundColor(.white)
+                                )
                         }
+                        .buttonStyle(.plain)
                     }
-                    .padding(.vertical, 8)
-                }
+                    .padding(20)
+                    .background(Theme.white)
+                    .cornerRadius(Theme.cornerXL)
+                    .shadow(color: .black.opacity(0.06), radius: 12, x: 0, y: 6)
+                    .padding(.horizontal, Theme.pad)
+                    .padding(.top, 16)
 
-                // Expenses List
-                Section(header: Text("Recent Expenses")) {
-                    ForEach(viewModel.sortedExpenses) { expense in
-                        NavigationLink(destination: ExpenseDetailView(expense: expense, viewModel: viewModel)) {
-                            ExpenseRowView(expense: expense, viewModel: viewModel)
-                        }
-                    }
-                    .onDelete { indexSet in
-                        for index in indexSet {
-                            let expense = viewModel.sortedExpenses[index]
-                            Task {
-                                await viewModel.deleteExpense(expense)
+                    // Recent Expenses
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Recent Expenses")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Theme.navy)
+                            .padding(.horizontal, Theme.pad)
+
+                        ForEach(viewModel.sortedExpenses) { expense in
+                            NavigationLink {
+                                ExpenseDetailView(expense: expense, viewModel: viewModel)
+                            } label: {
+                                ExpenseRowView(expense: expense, viewModel: viewModel)
                             }
                         }
                     }
+
+                    Spacer(minLength: 24)
                 }
             }
-            .navigationTitle("Expenses")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: { showingAddExpense = true }) {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
-            .sheet(isPresented: $showingAddExpense) {
-                AddExpenseView(viewModel: viewModel)
-            }
+        }
+        .sheet(isPresented: $showingAddExpense) {
+            AddExpenseView(viewModel: viewModel)
         }
     }
 
@@ -77,28 +82,34 @@ struct ExpenseRowView: View {
     let viewModel: ExpenseViewModel
 
     var body: some View {
-        HStack {
+        HStack(spacing: 14) {
             // Category Icon
-            Image(systemName: categoryIcon(expense.category))
-                .foregroundColor(categoryColor(expense.category))
-                .frame(width: 30)
+            Circle()
+                .fill(categoryColor(expense.category).opacity(0.2))
+                .frame(width: 48, height: 48)
+                .overlay(
+                    Image(systemName: categoryIcon(expense.category))
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(categoryColor(expense.category))
+                )
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(expense.title)
-                    .font(.headline)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.black)
 
-                HStack {
+                HStack(spacing: 4) {
                     Text(viewModel.userName(for: expense.paidByUserID))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundColor(.black.opacity(0.5))
 
                     Text("•")
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 13))
+                        .foregroundColor(.black.opacity(0.3))
 
                     Text(formatDate(expense.date))
-                        .font(.caption)
-                        .foregroundColor(.secondary)
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundColor(.black.opacity(0.5))
                 }
             }
 
@@ -106,14 +117,19 @@ struct ExpenseRowView: View {
 
             VStack(alignment: .trailing, spacing: 4) {
                 Text(formatCurrency(expense.amount))
-                    .font(.headline)
+                    .font(.system(size: 16, weight: .bold))
+                    .foregroundColor(.black)
 
                 Text(formatCurrency(expense.amountPerPerson) + " each")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundColor(.black.opacity(0.45))
             }
         }
-        .padding(.vertical, 4)
+        .padding(16)
+        .background(Theme.white)
+        .cornerRadius(Theme.cornerL)
+        .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
+        .padding(.horizontal, Theme.pad)
     }
 
     private func categoryIcon(_ category: ExpenseCategory) -> String {
@@ -130,13 +146,13 @@ struct ExpenseRowView: View {
 
     private func categoryColor(_ category: ExpenseCategory) -> Color {
         switch category {
-        case .groceries: return .green
-        case .utilities: return .orange
-        case .rent: return .purple
-        case .internet: return .blue
-        case .cleaning: return .cyan
-        case .household: return .indigo
-        case .other: return .gray
+        case .groceries: return Theme.sage
+        case .utilities: return Theme.terracotta
+        case .rent: return Theme.navy
+        case .internet: return Color.blue
+        case .cleaning: return Theme.sage.opacity(0.7)
+        case .household: return Theme.terracotta.opacity(0.7)
+        case .other: return Color.gray
         }
     }
 

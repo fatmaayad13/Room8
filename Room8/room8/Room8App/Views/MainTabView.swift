@@ -1,36 +1,45 @@
 import SwiftUI
 
 struct MainTabView: View {
-    @StateObject private var expenseViewModel = ExpenseViewModel()
-    @StateObject private var choreViewModel = ChoreScheduleViewModel()
-    @State private var showingAddChore = false
-    @State private var showingRoommates = false
+    @State private var selectedTab: AppTab = .home
 
     var body: some View {
-        TabView {
-            // Expenses Tab
-            ExpenseListView()
-                .tabItem {
-                    Label("Expenses", systemImage: "dollarsign.circle.fill")
-                }
+        TabView(selection: $selectedTab) {
+            // HOME
+            NavigationStack {
+                HomeView(selectedTab: $selectedTab)
+            }
+            .tabItem {
+                Label("Home", systemImage: "house")
+            }
+            .tag(AppTab.home)
 
-            // Chores Tab
-            ChoresView(viewModel: choreViewModel, showingAddChore: $showingAddChore)
-                .tabItem {
-                    Label("Chores", systemImage: "checkmark.circle.fill")
-                }
+            // CALENDAR
+            NavigationStack {
+                CalendarRootView()
+            }
+            .tabItem {
+                Label("Calendar", systemImage: "calendar")
+            }
+            .tag(AppTab.calendar)
 
-            // Roommates Tab
-            RoommatesView(viewModel: choreViewModel, showingRoommates: $showingRoommates)
-                .tabItem {
-                    Label("Roommates", systemImage: "person.3.fill")
-                }
+            // MONEY
+            NavigationStack {
+                MoneyRootView()
+            }
+            .tabItem {
+                Label("Money", systemImage: "dollarsign")
+            }
+            .tag(AppTab.money)
 
-            // Fridge Board Tab
-            FridgeBoardView()
-                .tabItem {
-                    Label("Fridge", systemImage: "square.grid.2x2")
-                }
+            // MORE
+            NavigationStack {
+                MoreView()
+            }
+            .tabItem {
+                Label("More", systemImage: "ellipsis")
+            }
+            .tag(AppTab.more)
         }
     }
 }

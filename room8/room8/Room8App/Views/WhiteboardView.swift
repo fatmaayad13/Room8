@@ -119,7 +119,7 @@ struct WhiteboardCanvasView: UIViewRepresentable {
         canvasView.delegate = context.coordinator
         canvasView.backgroundColor = UIColor.systemBackground
 
-        if let window = keyWindow() {
+        if keyWindow() != nil {
             let toolPicker = PKToolPicker()
             toolPicker.setVisible(true, forFirstResponder: canvasView)
             toolPicker.addObserver(canvasView)

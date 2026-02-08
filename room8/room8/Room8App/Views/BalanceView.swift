@@ -1,49 +1,90 @@
 import SwiftUI
 
 struct BalanceView: View {
-    @ObservedObject var viewModel: ExpenseViewModel
+    @EnvironmentObject var viewModel: ExpenseViewModel
 
     var balances: [UserBalance] {
         viewModel.calculateBalances()
     }
 
     var body: some View {
-        List {
-            Section(header: Text("Who Owes Who")) {
-                ForEach(balances) { balance in
-                    BalanceRowView(balance: balance, isCurrentUser: balance.user.id == viewModel.currentUser.id)
-                }
-            }
+        ZStack {
+            Theme.bg.ignoresSafeArea()
 
-            Section(header: Text("Summary")) {
-                ForEach(viewModel.expensesByCategory, id: \.category) { item in
-                    HStack {
-                        Label {
-                            Text(item.category.rawValue)
-                        } icon: {
-                            Image(systemName: categoryIcon(item.category))
-                                .foregroundColor(categoryColor(item.category))
+            ScrollView {
+                VStack(spacing: 16) {
+                    // Who Owes Who Section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Who Owes Who")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Theme.navy)
+                            .padding(.horizontal, Theme.pad)
+                            .padding(.top, 16)
+
+                        ForEach(balances) { balance in
+                            BalanceRowView(balance: balance, isCurrentUser: balance.user.id == viewModel.currentUser.id)
+                                .padding(.horizontal, Theme.pad)
                         }
-
-                        Spacer()
-
-                        Text(formatCurrency(item.total))
-                            .fontWeight(.semibold)
                     }
-                }
 
-                HStack {
-                    Text("Total")
-                        .fontWeight(.bold)
-                    Spacer()
-                    Text(formatCurrency(viewModel.totalExpenses))
-                        .fontWeight(.bold)
-                        .foregroundColor(.primary)
+                    // Summary Section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Summary by Category")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(Theme.navy)
+                            .padding(.horizontal, Theme.pad)
+                            .padding(.top, 12)
+
+                        VStack(spacing: 10) {
+                            ForEach(viewModel.expensesByCategory, id: \.category) { item in
+                                HStack(spacing: 14) {
+                                    Circle()
+                                        .fill(categoryColor(item.category).opacity(0.2))
+                                        .frame(width: 40, height: 40)
+                                        .overlay(
+                                            Image(systemName: categoryIcon(item.category))
+                                                .font(.system(size: 16, weight: .semibold))
+                                                .foregroundColor(categoryColor(item.category))
+                                        )
+
+                                    Text(item.category.rawValue)
+                                        .font(.system(size: 15, weight: .medium))
+                                        .foregroundColor(.black)
+
+                                    Spacer()
+
+                                    Text(formatCurrency(item.total))
+                                        .font(.system(size: 15, weight: .semibold))
+                                        .foregroundColor(.black)
+                                }
+                                .padding(14)
+                                .background(Theme.white)
+                                .cornerRadius(Theme.cornerM)
+                            }
+
+                            // Total
+                            HStack {
+                                Text("Total")
+                                    .font(.system(size: 16, weight: .bold))
+                                    .foregroundColor(.black)
+
+                                Spacer()
+
+                                Text(formatCurrency(viewModel.totalExpenses))
+                                    .font(.system(size: 18, weight: .bold))
+                                    .foregroundColor(Theme.navy)
+                            }
+                            .padding(16)
+                            .background(Theme.sand.opacity(0.5))
+                            .cornerRadius(Theme.cornerM)
+                        }
+                        .padding(.horizontal, Theme.pad)
+                    }
+
+                    Spacer(minLength: 24)
                 }
             }
         }
-        .navigationTitle("Balances")
-        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func categoryIcon(_ category: ExpenseCategory) -> String {
@@ -60,13 +101,13 @@ struct BalanceView: View {
 
     private func categoryColor(_ category: ExpenseCategory) -> Color {
         switch category {
-        case .groceries: return .green
-        case .utilities: return .orange
-        case .rent: return .purple
-        case .internet: return .blue
-        case .cleaning: return .cyan
-        case .household: return .indigo
-        case .other: return .gray
+        case .groceries: return Theme.sage
+        case .utilities: return Theme.terracotta
+        case .rent: return Theme.navy
+        case .internet: return Color.blue
+        case .cleaning: return Theme.sage.opacity(0.7)
+        case .household: return Theme.terracotta.opacity(0.7)
+        case .other: return Color.gray
         }
     }
 
@@ -83,31 +124,43 @@ struct BalanceRowView: View {
     let isCurrentUser: Bool
 
     var body: some View {
-        HStack {
+        HStack(spacing: 14) {
+            Circle()
+                .fill(balanceColor.opacity(0.15))
+                .frame(width: 48, height: 48)
+                .overlay(
+                    Image(systemName: balance.netBalance >= 0 ? "arrow.down.circle.fill" : "arrow.up.circle.fill")
+                        .font(.system(size: 20, weight: .semibold))
+                        .foregroundColor(balanceColor)
+                )
+
             VStack(alignment: .leading, spacing: 4) {
                 Text(isCurrentUser ? "You" : balance.user.name)
-                    .font(.headline)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(.black)
 
                 Text(balance.owesOrOwed)
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                    .font(.system(size: 13, weight: .medium))
+                    .foregroundColor(.black.opacity(0.5))
             }
 
             Spacer()
 
             Text(formatCurrency(abs(balance.netBalance)))
-                .font(.title3)
-                .fontWeight(.bold)
+                .font(.system(size: 17, weight: .bold))
                 .foregroundColor(balanceColor)
         }
-        .padding(.vertical, 4)
+        .padding(16)
+        .background(Theme.white)
+        .cornerRadius(Theme.cornerL)
+        .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
     }
 
     private var balanceColor: Color {
         if balance.netBalance > 0 {
-            return .green
+            return Theme.sage
         } else if balance.netBalance < 0 {
-            return .red
+            return Theme.terracotta
         } else {
             return .gray
         }
@@ -123,6 +176,7 @@ struct BalanceRowView: View {
 
 #Preview {
     NavigationView {
-        BalanceView(viewModel: ExpenseViewModel())
+        BalanceView()
+            .environmentObject(ExpenseViewModel())
     }
 }

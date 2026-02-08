@@ -37,7 +37,17 @@ class ChoreScheduleViewModel: ObservableObject {
         chores.removeAll { $0.id == choreId }
         saveChoresToStorage()
     }
-    
+
+    func toggleChoreCompletion(_ chore: Chore) {
+        if let index = chores.firstIndex(where: { $0.id == chore.id }) {
+            chores[index].isCompleted.toggle()
+            if chores[index].isCompleted {
+                chores[index].lastCompletedDate = Date()
+            }
+            saveChoresToStorage()
+        }
+    }
+
     // MARK: - Roommate Management
     
     func addRoommate(_ roommate: Roommate) {
@@ -185,7 +195,7 @@ class ChoreScheduleViewModel: ObservableObject {
         for event in calendarEvents {
             calendarService.createEvent(event) { [weak self] success, eventId, error in
                 DispatchQueue.main.async {
-                    if success, let eventId = eventId {
+                    if success, let _ = eventId {
                         syncedCount += 1
                         // Optionally: Store the calendar event ID with the chore
                     } else if let error = error {

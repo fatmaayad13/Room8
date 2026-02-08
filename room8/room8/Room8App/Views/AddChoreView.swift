@@ -11,6 +11,7 @@ struct AddChoreView: View {
     @State private var estimatedMinutes = 30
     @State private var priority: ChorePriority = .medium
     @State private var selectedRoommateId: UUID?
+    @State private var scheduledDate = Date()
     
     var body: some View {
         NavigationView {
@@ -41,10 +42,14 @@ struct AddChoreView: View {
                     }
                 }
                 
+                Section(header: Text("Schedule")) {
+                    DatePicker("Due Date", selection: $scheduledDate, displayedComponents: [.date])
+                }
+
                 Section(header: Text("Assignment")) {
                     Picker("Assign To", selection: $selectedRoommateId) {
                         Text("Unassigned").tag(UUID?(nil))
-                        
+
                         ForEach(viewModel.roommates) { roommate in
                             Text(roommate.name).tag(UUID?(roommate.id))
                         }
@@ -76,7 +81,8 @@ struct AddChoreView: View {
             frequency: frequency,
             estimatedMinutes: estimatedMinutes,
             priority: priority,
-            assignedTo: selectedRoommateId
+            assignedTo: selectedRoommateId,
+            scheduledDate: scheduledDate
         )
         viewModel.addChore(chore)
         isPresented = false
