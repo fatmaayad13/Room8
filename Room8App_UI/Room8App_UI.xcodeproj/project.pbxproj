@@ -31,6 +31,10 @@
 		8BD5BFB02F38632A004A0553 /* CalendarRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5BFAF2F386326004A0553 /* CalendarRootView.swift */; };
 		8BD5BFB22F386336004A0553 /* MoneyRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5BFB12F386334004A0553 /* MoneyRootView.swift */; };
 		8BD5BFB42F386350004A0553 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5BFB32F38634F004A0553 /* MoreView.swift */; };
+		8BD5BFB62F3867ED004A0553 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5BFB52F3867EB004A0553 /* Theme.swift */; };
+		8BD5BFB82F386B3E004A0553 /* AuthComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5BFB72F386B3B004A0553 /* AuthComponents.swift */; };
+		8BD5BFBC2F386B76004A0553 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5BFBB2F386B74004A0553 /* SignUpView.swift */; };
+		8BD5BFC02F387602004A0553 /* SignUpEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD5BFBF2F3875FE004A0553 /* SignUpEmailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +82,10 @@
 		8BD5BFAF2F386326004A0553 /* CalendarRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRootView.swift; sourceTree = "<group>"; };
 		8BD5BFB12F386334004A0553 /* MoneyRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyRootView.swift; sourceTree = "<group>"; };
 		8BD5BFB32F38634F004A0553 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
+		8BD5BFB52F3867EB004A0553 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		8BD5BFB72F386B3B004A0553 /* AuthComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthComponents.swift; sourceTree = "<group>"; };
+		8BD5BFBB2F386B74004A0553 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		8BD5BFBF2F3875FE004A0553 /* SignUpEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpEmailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -126,6 +134,8 @@
 		8BD5BF4D2F386260004A0553 = {
 			isa = PBXGroup;
 			children = (
+				8BD5BFB72F386B3B004A0553 /* AuthComponents.swift */,
+				8BD5BFB52F3867EB004A0553 /* Theme.swift */,
 				8BD5BF582F386260004A0553 /* Room8App_UI */,
 				8BD5BF662F386261004A0553 /* Room8App_UITests */,
 				8BD5BF702F386261004A0553 /* Room8App_UIUITests */,
@@ -193,6 +203,8 @@
 		8BD5BF942F386279004A0553 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8BD5BFBF2F3875FE004A0553 /* SignUpEmailView.swift */,
+				8BD5BFBB2F386B74004A0553 /* SignUpView.swift */,
 				8BD5BFB32F38634F004A0553 /* MoreView.swift */,
 				8BD5BFB12F386334004A0553 /* MoneyRootView.swift */,
 				8BD5BFAF2F386326004A0553 /* CalendarRootView.swift */,
@@ -351,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BD5BFB62F3867ED004A0553 /* Theme.swift in Sources */,
 				8BD5BFAC2F3862F0004A0553 /* HomeViewModel.swift in Sources */,
 				8BD5BFB02F38632A004A0553 /* CalendarRootView.swift in Sources */,
 				8BD5BFB42F386350004A0553 /* MoreView.swift in Sources */,
@@ -367,12 +380,15 @@
 				8BD5BF9D2F386279004A0553 /* ChoreService.swift in Sources */,
 				8BD5BF9E2F386279004A0553 /* Chore.swift in Sources */,
 				8BD5BFB22F386336004A0553 /* MoneyRootView.swift in Sources */,
+				8BD5BFB82F386B3E004A0553 /* AuthComponents.swift in Sources */,
 				8BD5BF9F2F386279004A0553 /* ExpenseService.swift in Sources */,
 				8BD5BFA02F386279004A0553 /* MockData.swift in Sources */,
 				8BD5BFA12F386279004A0553 /* ScheduleEvent.swift in Sources */,
 				8BD5BFA22F386279004A0553 /* User.swift in Sources */,
 				8BD5BFA32F386279004A0553 /* Household.swift in Sources */,
 				8BD5BFA82F3862D2004A0553 /* LoginView.swift in Sources */,
+				8BD5BFBC2F386B76004A0553 /* SignUpView.swift in Sources */,
+				8BD5BFC02F387602004A0553 /* SignUpEmailView.swift in Sources */,
 				8BD5BFAE2F38631A004A0553 /* HomeView.swift in Sources */,
 				8BD5BFA42F386279004A0553 /* BalanceView.swift in Sources */,
 			);

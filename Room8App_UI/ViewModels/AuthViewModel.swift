@@ -12,20 +12,18 @@ import Combine
 @MainActor
 final class AuthViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
-    @Published var currentUser: User? = nil
-
-    // Later: store token securely
-    // @Published var token: String? = nil
 
     func login(email: String, password: String) async {
-        // TEMP: mock login until backend is ready
-        // Later: call AuthService.login(...)
-        self.currentUser = nil
-        self.isLoggedIn = true
+        // MOCK: accept a test credential
+        if email.lowercased() == "test@room8.com" && password == "password" {
+            isLoggedIn = true
+        } else {
+            // or accept anything:
+            // isLoggedIn = true
+        }
     }
 
     func logout() {
         isLoggedIn = false
-        currentUser = nil
     }
 }

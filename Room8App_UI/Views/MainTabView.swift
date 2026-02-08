@@ -10,17 +10,37 @@ import SwiftUI
 struct MainTabView: View {
     var body: some View {
         TabView {
-            HomeView()
-                .tabItem { Label("Home", systemImage: "house") }
+            // HOME
+            NavigationStack {
+                HomeView()
+            }
+            .tabItem {
+                Label("Home", systemImage: "house")
+            }
 
-            CalendarRootView()
-                .tabItem { Label("Calendar", systemImage: "calendar") }
+            // CALENDAR
+            NavigationStack {
+                CalendarRootView()
+            }
+            .tabItem {
+                Label("Calendar", systemImage: "calendar")
+            }
 
-            MoneyRootView()
-                .tabItem { Label("Money", systemImage: "dollarsign") }
+            // MONEY
+            NavigationStack {
+                MoneyRootView()
+            }
+            .tabItem {
+                Label("Money", systemImage: "dollarsign")
+            }
 
-            MoreView()
-                .tabItem { Label("More", systemImage: "ellipsis") }
+            // MORE
+            NavigationStack {
+                MoreView()
+            }
+            .tabItem {
+                Label("More", systemImage: "ellipsis")
+            }
         }
     }
 }

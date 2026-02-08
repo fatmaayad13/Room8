@@ -11,19 +11,22 @@ import Combine
 @MainActor
 final class HomeViewModel: ObservableObject {
     @Published var greetingName: String = "Lorraine"
-    @Published var choresDue = 2
-    @Published var moneyOwed = 45
-    @Published var toBuy = 3
-    @Published var updates = 5
 
-    @Published var billText = "Wi-Fi bill ($50) due in 3 days!"
-    @Published var notes = ["Happy Birthday Fatma! <3", "Rmb to take out the trash!!", "Are we going to that party…"]
+    @Published var billLine: String = "Wi-Fi bill ($50) due in 3 days!"
+    @Published var notes: [String] = [
+        "Happy\nBirthday\nFatma! <3",
+        "Rmb to\ntake out\nthe trash!!",
+        "Are we\ngoing to\nthat party…"
+    ]
 
-    @Published var activity = [
+    @Published var choresDue: Int = 2
+    @Published var moneyOwed: Int = 45
+    @Published var toBuyCount: Int = 3
+    @Published var updatesCount: Int = 5
+
+    @Published var activity: [String] = [
         "Fatma completed “Take out trash”",
         "Kashaf added expense “Popcorn”",
         "Efrata added “Paper towels” to list"
     ]
-
-    // Later: inject Services and fetch real data here
 }
