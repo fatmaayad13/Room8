@@ -25,3 +25,15 @@ Pods/
 
 # Carthage
 Carthage/Build/
+
+# API Keys and Secrets - NEVER COMMIT THESE!
+GoogleCalendar.plist
+google-calendar-credentials.json
+*client_secret*.json
+*GoogleService-Info*.plist
+.env
+.env.*
+firebase-config.json
+api-keys.json
+secrets.json
+config.json
