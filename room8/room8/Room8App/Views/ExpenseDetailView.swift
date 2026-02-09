@@ -78,7 +78,10 @@ struct ExpenseDetailView: View {
             }
         }
         .navigationTitle(expense.title)
+        #if os(iOS)
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
         .alert("Delete Expense?", isPresented: $showingDeleteAlert) {
             Button("Cancel", role: .cancel) { }
             Button("Delete", role: .destructive) {

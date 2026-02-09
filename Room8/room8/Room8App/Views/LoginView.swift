@@ -47,6 +47,7 @@ struct LoginView: View {
                     Spacer()
                 }
             }
+            #if os(iOS)
             .navigationBarHidden(true)
             .navigationDestination(isPresented: $goToSignUp) {
                 SignUpView()

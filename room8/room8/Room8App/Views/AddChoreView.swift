@@ -16,8 +16,8 @@ struct AddChoreView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Chore Details")) {
-                    TextField("Chore Name", text: $name)
+                Section(header: Text("Activity Details")) {
+                    TextField("Activity Name", text: $name)
                     TextField("Description", text: $description)
                     
                     Picker("Frequency", selection: $frequency) {
@@ -56,14 +56,28 @@ struct AddChoreView: View {
                     }
                 }
             }
-            .navigationTitle("New Chore")
+            .navigationTitle("New Activity")
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         isPresented = false
                     }
                 }
+
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button("Save") {
+                        saveChore()
+                    }
+                    .disabled(name.trimmingCharacters(in: .whitespaces).isEmpty)
+                }
+                #endif
+            }
+        }
+                #endif
+                }
                 
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         saveChore()

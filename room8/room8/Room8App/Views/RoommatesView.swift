@@ -35,6 +35,7 @@ struct RoommatesView: View {
             }
             .navigationTitle("Roommates")
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showingAddRoommate = true }) {
                         Image(systemName: "plus.circle.fill")
@@ -119,12 +120,14 @@ struct AddRoommateView: View {
             }
             .navigationTitle("New Roommate")
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         isPresented = false
                     }
                 }
                 
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         saveRoommate()
@@ -252,12 +255,14 @@ struct EditRoommateView: View {
             }
             .navigationTitle("Edit Roommate")
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         isPresented = false
                     }
                 }
                 
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         saveChanges()

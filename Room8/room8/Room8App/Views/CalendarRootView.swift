@@ -57,6 +57,7 @@ struct CalendarRootView: View {
                 }
             }
         }
+        #if os(iOS)
         .navigationBarHidden(true)
         .sheet(isPresented: $showingAddChore) {
             AddChoreView(viewModel: choreViewModel, isPresented: $showingAddChore)

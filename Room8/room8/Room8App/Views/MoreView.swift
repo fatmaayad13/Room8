@@ -123,7 +123,10 @@ struct MoreView: View {
                 }
             }
         }
+        #if os(iOS)
+        #if os(iOS)
         .navigationBarHidden(true)
+        #endif
     }
 }
 

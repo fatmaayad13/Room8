@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E4292E6A2F38DF9B0078D96B /* GoogleAPIClientForRESTCore in Frameworks */ = {isa = PBXBuildFile; productRef = E4292E692F38DF9B0078D96B /* GoogleAPIClientForRESTCore */; };
+		E4292E6C2F38DF9B0078D96B /* GoogleAPIClientForREST_ACMEDNS in Frameworks */ = {isa = PBXBuildFile; productRef = E4292E6B2F38DF9B0078D96B /* GoogleAPIClientForREST_ACMEDNS */; };
+		E4292E6E2F38DF9B0078D96B /* GoogleAPIClientForREST_AIPlatformNotebooks in Frameworks */ = {isa = PBXBuildFile; productRef = E4292E6D2F38DF9B0078D96B /* GoogleAPIClientForREST_AIPlatformNotebooks */; };
+		E4292E702F38DF9B0078D96B /* GoogleAPIClientForREST_APIGateway in Frameworks */ = {isa = PBXBuildFile; productRef = E4292E6F2F38DF9B0078D96B /* GoogleAPIClientForREST_APIGateway */; };
+		E4292E722F38DF9B0078D96B /* GoogleAPIClientForREST_APIManagement in Frameworks */ = {isa = PBXBuildFile; productRef = E4292E712F38DF9B0078D96B /* GoogleAPIClientForREST_APIManagement */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E4D564B52F37B06200DBA659 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4292E6A2F38DF9B0078D96B /* GoogleAPIClientForRESTCore in Frameworks */,
+				E4292E702F38DF9B0078D96B /* GoogleAPIClientForREST_APIGateway in Frameworks */,
+				E4292E6E2F38DF9B0078D96B /* GoogleAPIClientForREST_AIPlatformNotebooks in Frameworks */,
+				E4292E722F38DF9B0078D96B /* GoogleAPIClientForREST_APIManagement in Frameworks */,
+				E4292E6C2F38DF9B0078D96B /* GoogleAPIClientForREST_ACMEDNS in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +125,11 @@
 			);
 			name = room8;
 			packageProductDependencies = (
+				E4292E692F38DF9B0078D96B /* GoogleAPIClientForRESTCore */,
+				E4292E6B2F38DF9B0078D96B /* GoogleAPIClientForREST_ACMEDNS */,
+				E4292E6D2F38DF9B0078D96B /* GoogleAPIClientForREST_AIPlatformNotebooks */,
+				E4292E6F2F38DF9B0078D96B /* GoogleAPIClientForREST_APIGateway */,
+				E4292E712F38DF9B0078D96B /* GoogleAPIClientForREST_APIManagement */,
 			);
 			productName = room8;
 			productReference = E4D564A62F37B05F00DBA659 /* room8.app */;
@@ -195,6 +213,9 @@
 			);
 			mainGroup = E4D5649D2F37B05F00DBA659;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E4292E682F38DF9B0078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E4D564A72F37B05F00DBA659 /* Products */;
 			projectDirPath = "";
@@ -591,6 +612,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E4292E682F38DF9B0078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/google-api-objectivec-client-for-rest";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E4292E692F38DF9B0078D96B /* GoogleAPIClientForRESTCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4292E682F38DF9B0078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForRESTCore;
+		};
+		E4292E6B2F38DF9B0078D96B /* GoogleAPIClientForREST_ACMEDNS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4292E682F38DF9B0078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_ACMEDNS;
+		};
+		E4292E6D2F38DF9B0078D96B /* GoogleAPIClientForREST_AIPlatformNotebooks */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4292E682F38DF9B0078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_AIPlatformNotebooks;
+		};
+		E4292E6F2F38DF9B0078D96B /* GoogleAPIClientForREST_APIGateway */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4292E682F38DF9B0078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_APIGateway;
+		};
+		E4292E712F38DF9B0078D96B /* GoogleAPIClientForREST_APIManagement */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4292E682F38DF9B0078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_APIManagement;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E4D5649E2F37B05F00DBA659 /* Project object */;
 }

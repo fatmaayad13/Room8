@@ -198,17 +198,33 @@ struct EditChoreView: View {
             }
             .navigationTitle("Edit Chore")
             .toolbar {
+                #if os(iOS)
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         isPresented = false
                     }
                 }
-                
+
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         saveChanges()
                     }
                 }
+                #else
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        isPresented = false
+                    }
+                }
+
+                ToolbarItem(placement: .confirmationAction) {
+                    Button("Save") {
+                        saveChanges()
+                    }
+                }
+                #endif
             }
             .onAppear(perform: loadChoreData)
         }

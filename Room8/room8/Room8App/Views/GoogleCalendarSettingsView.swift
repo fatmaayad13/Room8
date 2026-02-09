@@ -124,7 +124,9 @@ struct GoogleCalendarSettingsView: View {
                 }
             }
         }
+        #if os(iOS)
         .navigationBarHidden(true)
+        #endif
         .alert("Notice", isPresented: $showingAlert) {
             Button("OK", role: .cancel) { }
         } message: {

@@ -76,6 +76,7 @@ struct ChoresView: View {
             }
             .navigationTitle("Chores")
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: { showingAddChore = true }) {
                         Image(systemName: "plus.circle.fill")
@@ -248,6 +249,7 @@ struct GoogleCalendarSyncView: View {
             }
             .navigationTitle("Calendar Sync")
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
                         isPresented = false

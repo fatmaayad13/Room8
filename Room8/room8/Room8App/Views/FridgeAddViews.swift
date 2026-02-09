@@ -37,6 +37,7 @@ struct AddTextNoteView: View {
                 }
             }
             .navigationTitle("Add Sticky Note")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -58,63 +59,32 @@ struct AddTextNoteView: View {
     }
 }
 
-// MARK: - Add Drawing
+// MARK: - Add Drawing (Temporarily disabled for demo)
 struct AddDrawingView: View {
     @ObservedObject var viewModel: FridgeViewModel
     @Environment(\.dismiss) private var dismiss
-    @State private var canvas = PKCanvasView()
-    @State private var author = ""
 
     var body: some View {
         NavigationView {
-            VStack {
-                DrawingCanvasView(canvas: $canvas)
-                    .frame(height: 400)
-
-                Form {
-                    Section("From") {
-                        TextField("Your name (optional)", text: $author)
-                    }
-                }
+            VStack(spacing: 20) {
+                Image(systemName: "pencil.and.scribble")
+                    .font(.system(size: 60))
+                    .foregroundColor(.gray)
+                Text("Drawing feature")
+                    .font(.title2)
+                Text("Coming soon!")
+                    .foregroundColor(.secondary)
             }
             .navigationTitle("Draw Something")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Add") {
-                        let drawing = canvas.drawing
-                        viewModel.addDrawing(
-                            drawing: drawing,
-                            author: author.isEmpty ? "Anonymous" : author
-                        )
-                        dismiss()
-                    }
-                    .disabled(canvas.drawing.strokes.isEmpty)
+                    Button("Close") { dismiss() }
                 }
             }
         }
     }
-}
-
-struct DrawingCanvasView: UIViewRepresentable {
-    @Binding var canvas: PKCanvasView
-
-    func makeUIView(context: Context) -> PKCanvasView {
-        canvas.drawingPolicy = .anyInput
-        canvas.tool = PKInkingTool(.pen, color: .black, width: 3)
-
-        let toolPicker = PKToolPicker()
-        toolPicker.setVisible(true, forFirstResponder: canvas)
-        toolPicker.addObserver(canvas)
-        canvas.becomeFirstResponder()
-
-        return canvas
-    }
-
-    func updateUIView(_ uiView: PKCanvasView, context: Context) {}
 }
 
 // MARK: - Add Sticker
@@ -150,6 +120,7 @@ struct AddStickerView: View {
                 .padding()
             }
             .navigationTitle("Choose Sticker")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -214,6 +185,7 @@ struct AddPhotoView: View {
                 }
             }
             .navigationTitle("Add Photo")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

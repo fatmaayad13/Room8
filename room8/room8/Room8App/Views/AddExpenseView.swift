@@ -79,14 +79,17 @@ struct AddExpenseView: View {
                 }
             }
             .navigationTitle("Add Expense")
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         dismiss()
                     }
                 }
 
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Save") {
                         saveExpense()

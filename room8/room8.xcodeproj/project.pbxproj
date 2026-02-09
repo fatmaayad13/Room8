@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E4292E652F38DF3D0078D96B /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E4292E642F38DF3D0078D96B /* GoogleSignIn */; };
+		E4292E672F38DF3D0078D96B /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E4292E662F38DF3D0078D96B /* GoogleSignInSwift */; };
+		E4292E752F38EA820078D96B /* GoogleAPIClientForREST_Calendar in Frameworks */ = {isa = PBXBuildFile; productRef = E4292E742F38EA820078D96B /* GoogleAPIClientForREST_Calendar */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		E4D564B52F37B06200DBA659 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,17 +30,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E4290FA72F39012200FB1C21 /* room8.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = room8.xcodeproj; sourceTree = "<group>"; };
 		E4292C882F37EBE50078D96B /* room8.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = room8.xcodeproj; sourceTree = "<group>"; };
+		E4292E042F38C4480078D96B /* room8.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = room8.xcodeproj; sourceTree = "<group>"; };
 		E4D564A62F37B05F00DBA659 /* room8.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = room8.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D564B42F37B06200DBA659 /* room8Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = room8Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D564BE2F37B06200DBA659 /* room8UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = room8UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D5655E2F37DAFF00DBA659 /* room8.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = room8.xcodeproj; path = room8/room8.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E4D80FA32F37E80400055981 /* room8.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = room8.xcodeproj; sourceTree = "<group>"; };
+		E4EE4B852F39024700B08B82 /* room8.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = room8.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E4292E592F38CE170078D96B /* Exceptions for "room8" folder in "room8UITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				"Room8App/google-calendar-credentials.json",
+				Room8App/GoogleCalendar.plist,
+			);
+			target = E4D564BD2F37B06200DBA659 /* room8UITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		E4D564A82F37B05F00DBA659 /* room8 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E4292E592F38CE170078D96B /* Exceptions for "room8" folder in "room8UITests" target */,
+			);
 			path = room8;
 			sourceTree = "<group>";
 		};
@@ -55,6 +78,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4292E652F38DF3D0078D96B /* GoogleSignIn in Frameworks */,
+				E4292E752F38EA820078D96B /* GoogleAPIClientForREST_Calendar in Frameworks */,
+				E4292E672F38DF3D0078D96B /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,7 +101,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E4290FA82F39012200FB1C21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E4292C892F37EBE50078D96B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4292E052F38C4480078D96B /* Products */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -116,6 +156,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E4EE4B862F39024700B08B82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -136,6 +183,9 @@
 			);
 			name = room8;
 			packageProductDependencies = (
+				E4292E642F38DF3D0078D96B /* GoogleSignIn */,
+				E4292E662F38DF3D0078D96B /* GoogleSignInSwift */,
+				E4292E742F38EA820078D96B /* GoogleAPIClientForREST_Calendar */,
 			);
 			productName = room8;
 			productReference = E4D564A62F37B05F00DBA659 /* room8.app */;
@@ -219,17 +269,33 @@
 			);
 			mainGroup = E4D5649D2F37B05F00DBA659;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				E4292E632F38DF3D0078D96B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				E4292E732F38EA820078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = E4D564A72F37B05F00DBA659 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = E4EE4B862F39024700B08B82 /* Products */;
+					ProjectRef = E4EE4B852F39024700B08B82 /* room8.xcodeproj */;
+				},
+				{
 					ProductGroup = E4D565612F37DAFF00DBA659 /* Products */;
 					ProjectRef = E4D5655E2F37DAFF00DBA659 /* room8.xcodeproj */;
 				},
 				{
+					ProductGroup = E4292E052F38C4480078D96B /* Products */;
+					ProjectRef = E4292E042F38C4480078D96B /* room8.xcodeproj */;
+				},
+				{
 					ProductGroup = E4D80FA42F37E80400055981 /* Products */;
 					ProjectRef = E4D80FA32F37E80400055981 /* room8.xcodeproj */;
+				},
+				{
+					ProductGroup = E4290FA82F39012200FB1C21 /* Products */;
+					ProjectRef = E4290FA72F39012200FB1C21 /* room8.xcodeproj */;
 				},
 				{
 					ProductGroup = E4292C892F37EBE50078D96B /* Products */;
@@ -629,6 +695,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E4292E632F38DF3D0078D96B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.0;
+			};
+		};
+		E4292E732F38EA820078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/google-api-objectivec-client-for-rest";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E4292E642F38DF3D0078D96B /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4292E632F38DF3D0078D96B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		E4292E662F38DF3D0078D96B /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4292E632F38DF3D0078D96B /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		E4292E742F38EA820078D96B /* GoogleAPIClientForREST_Calendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E4292E732F38EA820078D96B /* XCRemoteSwiftPackageReference "google-api-objectivec-client-for-rest" */;
+			productName = GoogleAPIClientForREST_Calendar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E4D5649E2F37B05F00DBA659 /* Project object */;
 }

@@ -55,7 +55,10 @@ struct SignUpView: View {
                 Spacer()
             }
         }
+        #if os(iOS)
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 

@@ -51,10 +51,14 @@ struct MoneyRootView: View {
                         .environmentObject(expenseViewModel)
                         .tag(2)
                 }
-                .tabViewStyle(.page(indexDisplayMode: .never))
+                #if os(iOS)
+.tabViewStyle(.page(indexDisplayMode: .never))
+#endif
             }
         }
-        .navigationBarHidden(true)
+        #if os(iOS)
+.navigationBarHidden(true)
+#endif
     }
 }
 
@@ -72,10 +76,10 @@ struct ShoppingListView: View {
                         .padding(.top, 16)
 
                     VStack(spacing: 12) {
-                        ShoppingItemRow(name: "Milk", addedBy: "Sarah", checked: false)
+                        ShoppingItemRow(name: "Milk", addedBy: "Fatma", checked: false)
                         ShoppingItemRow(name: "Eggs", addedBy: "You", checked: true)
-                        ShoppingItemRow(name: "Bread", addedBy: "Mike", checked: false)
-                        ShoppingItemRow(name: "Coffee", addedBy: "Emma", checked: false)
+                        ShoppingItemRow(name: "Bread", addedBy: "Lorraine", checked: false)
+                        ShoppingItemRow(name: "Coffee", addedBy: "Efrata", checked: false)
                     }
                     .padding(.horizontal, Theme.pad)
                 }

@@ -42,6 +42,9 @@ struct FridgeBoardView: View {
             }
             .navigationTitle("Fridge Board")
             .toolbar {
+                #if os(iOS)
+                #if os(iOS)
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         showingAddNote = true
@@ -158,13 +161,25 @@ struct AddStickyNoteView: View {
                 }
             }
             .navigationTitle("Add Sticky Note")
+            #if os(iOS)
+            #if os(iOS)
+
             .navigationBarTitleDisplayMode(.inline)
+
+            #endif
             .toolbar {
+                #if os(iOS)
+                #if os(iOS)
+
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         isPresented = false
                     }
+                #endif
                 }
+                #if os(iOS)
+                #if os(iOS)
+
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Add") {
                         let author = noteAuthor.isEmpty ? "Anonymous" : noteAuthor

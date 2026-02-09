@@ -13,8 +13,7 @@ class ChoreScheduleViewModel: ObservableObject {
     @Published var calendarsyncInProgress = false
     
     private let storageService = StorageService.shared
-    private let calendarService: GoogleCalendarServiceProtocol = GoogleCalendarService.shared
-    
+
     init() {
         loadData()
     }
@@ -196,116 +195,7 @@ class ChoreScheduleViewModel: ObservableObject {
         return roommates.first { $0.id == roommateId }
     }
     
-    // MARK: - Google Calendar Sync
-    
-    func authorizeGoogleCalendar(completion: @escaping (Bool) -> Void) {
-        calendarsyncInProgress = true
-        calendarService.authorize { [weak self] success, error in
-            DispatchQueue.main.async {
-                self?.calendarsyncInProgress = false
-                if success {
-                    self?.errorMessage = nil
-                    completion(true)
-                } else {
-                    self?.errorMessage = error?.localizedDescription ?? "Failed to authorize Google Calendar"
-                    completion(false)
-                }
-            }
-        }
-    }
-    
-    func isGoogleCalendarAuthorized() -> Bool {
-        return calendarService.isAuthorized()
-    }
-    
-    func syncChoresToCalendar(completion: @escaping (Bool) -> Void) {
-        guard isGoogleCalendarAuthorized() else {
-            errorMessage = "Not authorized with Google Calendar. Please authorize first."
-            completion(false)
-            return
-        }
-        
-        calendarsyncInProgress = true
-        let calendarEvents = CalendarConverter.choresToCalendarEvents(
-            chores: chores,
-            roommates: roommates
-        )
-        
-        var syncedCount = 0
-        let totalCount = calendarEvents.count
-        
-        guard totalCount > 0 else {
-            calendarsyncInProgress = false
-            isCalendarSynced = true
-            completion(true)
-            return
-        }
-        
-        for event in calendarEvents {
-            calendarService.createEvent(event) { [weak self] success, eventId, error in
-                DispatchQueue.main.async {
-                    if success, let _ = eventId {
-                        syncedCount += 1
-                        // Optionally: Store the calendar event ID with the chore
-                    } else if let error = error {
-                        self?.errorMessage = "Failed to sync chore: \(error.localizedDescription)"
-                    }
-                    
-                    if syncedCount == totalCount {
-                        self?.calendarsyncInProgress = false
-                        self?.isCalendarSynced = true
-                        completion(true)
-                    }
-                }
-            }
-        }
-    }
-    
-    func updateChoreInCalendar(_ chore: Chore, completion: @escaping (Bool) -> Void) {
-        let roommate = getRoommateForChore(chore)
-        let calendarEvent = CalendarConverter.choreToCalendarEvent(chore: chore, roommate: roommate)
-        
-        // In a real implementation, you would store the Google Calendar event ID
-        // For now, we'll attempt to update using the chore ID as a reference
-        let eventId = "room8_\(chore.id.uuidString)"
-        
-        calendarService.updateEvent(eventId, calendarEvent) { [weak self] success, error in
-            DispatchQueue.main.async {
-                if success {
-                    self?.errorMessage = nil
-                } else {
-                    self?.errorMessage = error?.localizedDescription ?? "Failed to update calendar event"
-                }
-                completion(success)
-            }
-        }
-    }
-    
-    func removeChoreFromCalendar(_ choreId: UUID, completion: @escaping (Bool) -> Void) {
-        let eventId = "room8_\(choreId.uuidString)"
-        
-        calendarService.deleteEvent(eventId) { [weak self] success, error in
-            DispatchQueue.main.async {
-                if success {
-                    self?.errorMessage = nil
-                } else {
-                    self?.errorMessage = error?.localizedDescription ?? "Failed to remove calendar event"
-                }
-                completion(success)
-            }
-        }
-    }
-    
-    func markChoreCompleteAndUpdateCalendar(_ choreId: UUID, by roommateId: UUID, notes: String? = nil) {
-        completeChore(choreId, by: roommateId, notes: notes)
-        
-        // Update the calendar event to mark as complete
-        if let chore = chores.first(where: { $0.id == choreId }) {
-            updateChoreInCalendar(chore) { _ in
-                // Calendar update completed
-            }
-        }
-    }
+    // MARK: - Google Calendar Sync (Disabled for demo)
     
     // MARK: - Storage
     

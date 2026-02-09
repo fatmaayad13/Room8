@@ -45,6 +45,7 @@ struct EnhancedFridgeView: View {
             }
             .navigationTitle("Fridge Board")
             .toolbar {
+                #if os(iOS)
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
                         Button {

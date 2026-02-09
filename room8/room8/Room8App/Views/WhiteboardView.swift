@@ -1,39 +1,29 @@
 import SwiftUI
 import PencilKit
-import UIKit
 
 // MARK: - Whiteboard View
 struct WhiteboardView: View {
     @StateObject private var viewModel = WhiteboardViewModel()
     @State private var noteText = ""
     @State private var noteAuthor = ""
-    @State private var showClearConfirmation = false
 
     var body: some View {
         NavigationView {
             List {
                 Section(header: Text("Whiteboard")) {
-                    WhiteboardCanvasView(
-                        drawing: Binding(
-                            get: { viewModel.drawing },
-                            set: { viewModel.updateDrawing($0) }
-                        )
-                    )
-                    .frame(height: 320)
-                    .listRowInsets(EdgeInsets())
-
-                    HStack {
-                        Button(role: .destructive) {
-                            showClearConfirmation = true
-                        } label: {
-                            Label("Clear Canvas", systemImage: "trash")
-                        }
-                        Spacer()
-                        Text("Auto-saved")
+                    VStack(spacing: 16) {
+                        Image(systemName: "pencil.and.scribble")
+                            .font(.system(size: 50))
+                            .foregroundColor(.gray)
+                        Text("Drawing canvas")
+                            .font(.headline)
+                        Text("Coming soon!")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
-                    .padding(.vertical, 4)
+                    .frame(height: 320)
+                    .frame(maxWidth: .infinity)
+                    .listRowInsets(EdgeInsets())
                 }
 
                 Section(header: Text("Add Note")) {
@@ -95,69 +85,10 @@ struct WhiteboardView: View {
                 }
             }
             .navigationTitle("Whiteboard")
-            .confirmationDialog(
-                "Clear the canvas?",
-                isPresented: $showClearConfirmation,
-                titleVisibility: .visible
-            ) {
-                Button("Clear", role: .destructive) {
-                    viewModel.clearDrawing()
-                }
-            }
         }
     }
 }
 
-// MARK: - PencilKit Canvas Wrapper
-struct WhiteboardCanvasView: UIViewRepresentable {
-    @Binding var drawing: PKDrawing
-
-    func makeUIView(context: Context) -> PKCanvasView {
-        let canvasView = PKCanvasView()
-        canvasView.drawing = drawing
-        canvasView.drawingPolicy = .anyInput
-        canvasView.delegate = context.coordinator
-        canvasView.backgroundColor = UIColor.systemBackground
-
-        if keyWindow() != nil {
-            let toolPicker = PKToolPicker()
-            toolPicker.setVisible(true, forFirstResponder: canvasView)
-            toolPicker.addObserver(canvasView)
-            canvasView.becomeFirstResponder()
-        }
-
-        return canvasView
-    }
-
-    func updateUIView(_ uiView: PKCanvasView, context: Context) {
-        if uiView.drawing != drawing {
-            uiView.drawing = drawing
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(drawing: $drawing)
-    }
-
-    private func keyWindow() -> UIWindow? {
-        UIApplication.shared.connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .flatMap { $0.windows }
-            .first { $0.isKeyWindow }
-    }
-
-    class Coordinator: NSObject, PKCanvasViewDelegate {
-        @Binding var drawing: PKDrawing
-
-        init(drawing: Binding<PKDrawing>) {
-            _drawing = drawing
-        }
-
-        func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {
-            drawing = canvasView.drawing
-        }
-    }
-}
 
 #Preview {
     WhiteboardView()
