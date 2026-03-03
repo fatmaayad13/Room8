@@ -26,7 +26,7 @@ A full-stack roommate management app that simplifies shared living — track exp
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/yourusername/Room8.git
+git clone https://github.com/fatmaayad13/Room8.git
 open Room8.xcodeproj
 ```
 
