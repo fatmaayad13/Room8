@@ -4,12 +4,9 @@ A full-stack roommate management app that simplifies shared living — track exp
 ---
 
 ## ✨ Highlights
-
-- 📱 SwiftUI-based iOS app
-- 💸 Shared expense tracking with balance calculations
-- 🧹 Chore assignment & completion tracking
-- 🧩 Clean separation of frontend and backend architecture
-- 🚀 Designed for future App Store deployment
+- 🏠 Replaces scattered group chats and spreadsheets with a unified household system  
+- 💸 Creates accountability through clear expense and responsibility tracking  
+- 🧩 Built with a clean frontend–backend separation to support future scaling
 
 ---
 
@@ -35,10 +32,7 @@ Requirements:
 - Xcode 15+
 - iOS 17+
 
-For detailed setup and build instructions, see:
-
-👉 [Setup Guide](Room8App/SETUP.md)  
-👉 [Build Guide](BUILD_GUIDE.md)
+See the [Setup Guide](Room8App/SETUP.md) for full configuration instructions.
 
 ## 📦 Status
 
