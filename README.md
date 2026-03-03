@@ -35,6 +35,11 @@ Requirements:
 - Xcode 15+
 - iOS 17+
 
+For detailed setup and build instructions, see:
+
+👉 [Setup Guide](Room8App/SETUP.md)  
+👉 [Build Guide](BUILD_GUIDE.md)
+
 ## 📦 Status
 
 Currently in active development.
